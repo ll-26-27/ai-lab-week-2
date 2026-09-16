@@ -2,7 +2,9 @@
 .DS_Store
 ._*
 
-# --- local-only folders (raw intake, scratch) ---
+# --- local-only folders: media students bring in or download, and scratch ---
+_media/*
+!_media/.gitkeep
 _raw/
 _temp/
 
@@ -51,3 +53,6 @@ pip-log.txt
 
 # --- logs ---
 *.log
+
+# --- generated images and text from utils/ (keep the ones you want by moving them) ---
+output/
