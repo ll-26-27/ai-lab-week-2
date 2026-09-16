@@ -1,0 +1,53 @@
+# --- macOS ---
+.DS_Store
+._*
+
+# --- local-only folders (raw intake, scratch) ---
+_raw/
+_temp/
+
+# --- secrets ---
+.env
+.env.*
+!.env.example
+
+# --- Node / JS ---
+node_modules/
+.pnpm-store/
+.next/
+out/
+dist/
+build/
+.turbo/
+.cache/
+*.tsbuildinfo
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.vercel
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.python-version
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+pip-log.txt
+
+# --- editors / tools ---
+.vscode/
+.idea/
+*.swp
+.claude/settings.local.json
+
+# --- logs ---
+*.log
