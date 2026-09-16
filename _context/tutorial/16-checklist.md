@@ -35,6 +35,7 @@ Tick every box before you leave. Anything that won't tick: tell Marlon or Madele
 - [ ] One text generation with Claude (Sonnet, Opus, or Haiku) through the HUIT account.
 - [ ] One text and one image generation through OpenRouter.
 - [ ] One text and one image generation through fal.
+- [ ] A video transcribed with `--verbose` and a `player.html` that jumps to segments when I click them.
 - [ ] One prompt across twenty image models, and the gallery open from `output/batches/`.
 
 Next: [this week's activity](17-weekly-activity.md).

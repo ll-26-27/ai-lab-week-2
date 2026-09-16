@@ -4,7 +4,7 @@ slug: openrouter
 short: "An aggregator that puts many companies' text and image models behind one API key."
 aliases: []
 category: apis-and-keys
-see_also: [api, model, fal]
+see_also: [openrouter-image-apis, api, model, fal]
 updated: 2026-09-16
 ---
 
@@ -24,4 +24,4 @@ It is the provider this course's activities default to, precisely because compar
 
 ## See also
 
-[API](api.md) · [Model](model.md) · [fal](fal.md)
+[OpenRouter image APIs](openrouter-image-apis.md) · [API](api.md) · [Model](model.md) · [fal](fal.md)

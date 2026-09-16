@@ -95,8 +95,11 @@ Plain-language definitions for TDM 155AI, built from week 2's setup tutorial: th
 | [API key](api-key.md) | A long secret string sent with every API request, saying which account to bill and letting that account be revoked if leaked. |
 | [Environment variable](environment-variable.md) | A named value a program can read from its surroundings, instead of having it typed directly into the code. |
 | [fal](fal.md) | Another model aggregator, alongside OpenRouter, offering a different roster of image and video models through one key. |
+| [fal image APIs](fal-image-apis.md) | fal's image endpoints, one URL per model, where the reference-image field and its limit differ endpoint by endpoint and the OpenAPI schema is how you find out. |
+| [fal video APIs](fal-video-apis.md) | fal's video endpoints: text-to-video, image-to-video from a first frame, first-and-last-frame, keyframes, and reference-to-video, each with its own field names. |
 | [HUIT API portal](huit-api-portal.md) | Harvard's own gateway to models like OpenAI's and Google's, reached with an HUIT-issued key instead of a personal account. |
 | [OpenRouter](openrouter.md) | An aggregator that puts many companies' text and image models behind one API key. |
+| [OpenRouter image APIs](openrouter-image-apis.md) | OpenRouter's dedicated Image API (and its Video API): one request shape for fifty-plus models, reference images in, and a discovery endpoint that says how many each model takes. |
 
 ### Agents and harnesses
 
@@ -181,6 +184,8 @@ Plain-language definitions for TDM 155AI, built from week 2's setup tutorial: th
 - **[Diffusion model](diffusion-model.md)**: The technique behind most image models today: starting from noise and gradually refining it toward a picture matching the prompt.
 - **[Environment variable](environment-variable.md)**: A named value a program can read from its surroundings, instead of having it typed directly into the code.
 - **[fal](fal.md)**: Another model aggregator, alongside OpenRouter, offering a different roster of image and video models through one key.
+- **[fal image APIs](fal-image-apis.md)**: fal's image endpoints, one URL per model, where the reference-image field and its limit differ endpoint by endpoint.
+- **[fal video APIs](fal-video-apis.md)**: fal's video endpoints: text-to-video, first frame, first-and-last-frame, keyframes, and reference-to-video, each with its own field names.
 - **[ffmpeg](ffmpeg.md)**: A command-line tool for converting, trimming, and inspecting audio and video files, installed through the package manager.
 - **[Frontmatter](frontmatter.md)**: A block of key-value fields at the top of a Markdown file, fenced by `---` lines, holding metadata rather than prose.
 - **[gh (GitHub CLI)](gh-cli.md)**: GitHub's own command-line tool: sign in, clone private repos, and manage GitHub without leaving the terminal.
@@ -200,6 +205,7 @@ Plain-language definitions for TDM 155AI, built from week 2's setup tutorial: th
 - **[Model](model.md)**: The specific version of an AI doing the thinking; companies ship a few, trading depth for speed.
 - **[Node](node.md)**: The program that runs the JavaScript scripts in this course's `utils/` folder, installed through the package manager.
 - **[OpenRouter](openrouter.md)**: An aggregator that puts many companies' text and image models behind one API key.
+- **[OpenRouter image APIs](openrouter-image-apis.md)**: OpenRouter's Image and Video APIs: one request shape, reference images in, and a discovery endpoint that states each model's limits.
 - **[Package manager](package-manager.md)**: A terminal tool that installs and updates programs by name, remembering what it put on your machine.
 - **[PATH](path.md)**: The list of folders your terminal searches when you type a command's name.
 - **[Permission mode](permission-mode.md)**: The setting that decides how much an agent may do without asking you first.

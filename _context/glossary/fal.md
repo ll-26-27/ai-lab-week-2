@@ -4,7 +4,7 @@ slug: fal
 short: "Another model aggregator, alongside OpenRouter, offering a different roster of image and video models through one key."
 aliases: []
 category: apis-and-keys
-see_also: [openrouter, api, image-model]
+see_also: [fal-image-apis, fal-video-apis, openrouter, api, image-model]
 updated: 2026-09-16
 ---
 
@@ -24,4 +24,4 @@ Week two's twenty-models activity runs on fal, because its image catalogue is th
 
 ## See also
 
-[OpenRouter](openrouter.md) · [API](api.md) · [Image model](image-model.md)
+[fal image APIs](fal-image-apis.md) · [fal video APIs](fal-video-apis.md) · [OpenRouter](openrouter.md) · [API](api.md) · [Image model](image-model.md)

@@ -113,6 +113,14 @@ node utils/transcribe.mjs speech.mp3 --model microsoft/mai-transcribe-2
 
 Cost reported: $0.00017. The endpoint takes WAV, MP3, FLAC, M4A, OGG, WebM, and AAC up to 25 MB; longer recordings should be MP3 and, past twenty minutes or so, split with ffmpeg first.
 
+## transcript player (no API call)
+
+```bash
+node utils/transcript-player.mjs output/transcript/RUN --media _media/clip.mp4
+```
+
+Verified 2026-09-16 on a synthesized talking clip: `ffmpeg -i clip.mp4 -vn -codec:a libmp3lame -q:a 6 clip.mp3`, then `transcribe.mjs --verbose` (two segments), then this; the page played the video and clicking a line seeked to it.
+
 ## Every route, at a glance
 
 | route | kind | worked? | model | cost reported |

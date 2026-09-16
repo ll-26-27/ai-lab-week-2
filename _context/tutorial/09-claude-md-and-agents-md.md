@@ -23,6 +23,7 @@ TDM 155AI week 2: the setup tutorial and the first generation scripts. I cloned 
 - Generated files go to `output/`, which is gitignored.
 - When you show me how to do something, give one command at a time, not a chained one-liner.
 - Ask before deleting anything or running `git push`.
+- To build a page that plays a video with a clickable transcript, start from `utils/templates/transcript-player.html`.
 - End every reply with a rhyming couplet that sums up what you just did.
 ```
 
@@ -96,7 +97,7 @@ TDM 155AI (Harvard, fall 2026), week 2: "tools of the AI trade." Students clone 
 - `output/`: gitignored. Every script writes a new folder per run here (`output/image/…`, `output/text/…`, `output/transcript/…`, `output/batches/…`) holding the result plus `request.json` and `response.json`. Nothing is overwritten. Keepers get moved to a tracked folder on purpose.
 - `.env`: gitignored. The API keys. `.env.example` shows the shape. The scripts read it from the repo root.
 - `nextjs/`: the site that renders `_context/`. Leave it alone unless asked.
-- `.agents/skills/`: skills (Codex reads this; `.claude/skills/` links to it for Claude Code).
+- `.agents/skills/`: skills (Codex reads this; `.claude/skills/` links to it for Claude Code). `family-batch` wraps the batch script; `origin-story` turns a person's account of themselves into a four- or eight-panel comic with the comic tools, and has its own references to read first.
 
 ## The tools
 
@@ -108,9 +109,12 @@ All are Node scripts, no dependencies, Node 22 or newer. Every one has `--help`,
 | `utils/generate-text.mjs PROVIDER "prompt" --model ID` | one text reply |
 | `utils/batch-images.mjs "prompt" --models A,B --n 4` | one prompt across several models, several runs, plus an `index.html` grid |
 | `utils/batch-text.mjs "prompt" --models A,B [--expect TEXT]` | same for text, with a results table |
-| `utils/transcribe.mjs AUDIO --model ID` | speech to text through OpenRouter |
+| `utils/transcribe.mjs AUDIO --model ID` | speech to text through OpenRouter; `--verbose` for timestamped segments |
+| `utils/transcript-player.mjs RUN --media FILE` | a web page that plays the media with a clickable transcript, filled from `utils/templates/transcript-player.html` |
+| `utils/serve.mjs [FOLDER] [PORT]` | serves a folder at localhost with range requests, so players and galleries in `output/` open properly |
 | `utils/stills.mjs VIDEO [--n 12 \| --every S \| --at HH:MM:SS]` | frames from a video plus a contact sheet (ffmpeg) |
 | `utils/list-image-models.mjs`, `utils/list-text-models.mjs` | what OpenRouter offers today (no key needed) |
+| `utils/comic.mjs init|generate|import|status|render` | the origin-story comic tools; read `.agents/skills/origin-story/SKILL.md` before using them (needs `npm install` once, for Sharp) |
 
 Providers and the key each needs: `huit-bedrock`, `huit-openai`, `huit-gemini` (Harvard's gateway, `HUIT_API_KEY`); `openrouter` (`OPENROUTER_API_KEY`); `fal` (`FAL_API_KEY`). Claude through HUIT uses Bedrock ids such as `us.anthropic.claude-sonnet-5`; the full verified list is in `utils/examples.md`.
 
@@ -122,6 +126,16 @@ Providers and the key each needs: `huit-bedrock`, `huit-openai`, `huit-gemini` (
 4. **Run one command at a time** and say what it does in a sentence. When it finishes, name the run folder and what is in it.
 5. **Keep it cheap.** Prefer the small models unless asked; keep batches to a few models and a few runs; if a call fails with a credit or limit message, stop and show the message rather than retrying.
 6. **Read the receipts when something is off.** `request.json` and `response.json` in the run folder say exactly what was sent and what came back.
+
+## Building a transcript player (tutorial page 12)
+
+When a student asks for a page that plays a video or audio file with a clickable transcript:
+
+- The transcript must come from a `utils/transcribe.mjs` run made with `--verbose`; its `response.json` then has a `segments` array with `start`, `end`, and `text`. If the run has no segments, say so and re-run with `--verbose` rather than inventing timestamps.
+- Start from the template at `utils/templates/transcript-player.html`. Its header comment lists four placeholders (`{{TITLE}}`, `{{MEDIA_TAG}}`, `{{META}}`, `{{SEGMENTS_JSON}}`); copy the file beside the transcript, fill them, and you have a working page. It is one self-contained HTML file with no external libraries: a `<video>` (or `<audio>`) element whose `src` is the media file's path written relative to where the page is saved, and one line per segment; clicking a line sets `currentTime` to the segment's start and plays, and a `timeupdate` listener highlights the current line. Change the template's look or behavior freely when the student asks; keep the seeking logic.
+- Write the page beside the transcript in its `output/transcript/<run>/` folder unless asked otherwise, and remind them that the page and the media must move together.
+- Open it by double-clicking the file, or serve it with `node utils/serve.mjs output` and open http://localhost:8787/. Do not use Python's `http.server` or another server without HTTP range support: the transcript will show but clicks will not seek, because the browser cannot fetch the video in pieces. If a student reports exactly that symptom, the server is the cause.
+- `utils/transcript-player.mjs RUN --media FILE` fills the same template automatically. Offer it as the fallback, or when the student just wants the page and not the exercise.
 
 ## Rules
 

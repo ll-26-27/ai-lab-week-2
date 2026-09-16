@@ -95,7 +95,7 @@ OpenRouter also fronts transcription models. Record ten seconds on your phone (a
 node utils/transcribe.mjs _media/memo.m4a --model openai/whisper-large-v3
 ```
 
-The words print, and `output/transcript/<run>/transcript.md` holds them with the model and duration on top. Add `--verbose` for timestamped segments, or `--language es` to tell it what to expect. The endpoint accepts WAV, MP3, FLAC, M4A, OGG, WebM, and AAC, up to 25 MB; ffmpeg can convert or split anything bigger. This is the same tool that will turn interview footage into text later in the term; here it's a ten-second proof that audio is text too.
+The words print, and `output/transcript/<run>/transcript.md` holds them with the model and duration on top. Add `--verbose` for timestamped segments, or `--language es` to tell it what to expect. The endpoint accepts WAV, MP3, FLAC, M4A, OGG, WebM, and AAC, up to 25 MB; ffmpeg can convert or split anything bigger. Page 12 does this with a whole video and builds a player for it; here it's a ten-second proof that audio is text too.
 
 ## 11.5 Let Claude or Codex run it
 

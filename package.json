@@ -18,6 +18,14 @@
     "fal-models": "node utils/list-fal-models.mjs",
     "stills": "node utils/stills.mjs",
     "test": "node --test utils/test/*.test.mjs",
-    "transcribe": "node utils/transcribe.mjs"
-  }
+    "transcribe": "node utils/transcribe.mjs",
+    "player": "node utils/transcript-player.mjs",
+    "serve": "node utils/serve.mjs",
+    "comic": "node utils/comic.mjs",
+    "compress-image": "node utils/compress-image.mjs"
+  },
+  "dependencies": {
+    "sharp": "^0.35.4"
+  },
+  "packageManager": "pnpm@10.7.0"
 }

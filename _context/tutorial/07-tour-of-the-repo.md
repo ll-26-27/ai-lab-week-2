@@ -22,9 +22,11 @@ tdm155ai-week-2/
     list-text-models.mjs     which text models
     list-fal-models.mjs      fal's catalogue
     examples.md              commands verified to work, with dates
+    comic.mjs                the origin-story comic tools (used by the skill below)
     lib/                     the shared code the scripts use
     test/                    checks that the scripts behave (no network needed)
-  .agents/skills/        a skill (a recipe an agent can follow); .claude/skills/ points at it
+  .agents/skills/        skills (recipes an agent can follow): family-batch, and the origin-story comic; .claude/skills/ points at them
+  examples/              a plan and script that seed a first origin comic
   .env.example           the shape of the secrets file, with the values blank
   .gitignore             what Git is told to ignore
   package.json           a name for the project and shortcuts for the scripts
@@ -80,7 +82,7 @@ Three states to know: **tracked** (Git has it and watches it), **untracked** (Gi
 
 ## Read `package.json`
 
-This file names the project and lists shortcuts under `scripts`. `pnpm image` and `node utils/generate-image.mjs` are the same thing; the shortcut just saves typing. There are no dependencies to install: the scripts use only what ships with Node.
+This file names the project and lists shortcuts under `scripts`. `pnpm image` and `node utils/generate-image.mjs` are the same thing; the shortcut just saves typing. The generation scripts use only what ships with Node. One dependency is listed for the comic tools (an image library called Sharp); `npm install` once at the top of the repo fetches it into `node_modules/`, which Git ignores. You don't need it until you make a comic.
 
 ## Read a script
 

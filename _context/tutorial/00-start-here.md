@@ -13,6 +13,7 @@ Week 2 is the setup week. Week 1 was a sprint through everything the course does
 - This repository cloned into an `AI` folder in your home directory and open in VS Code.
 - The folder connected to both desktop apps, in their work and code modes, and your first images and text generated from scripts in `utils/` with a class API key in a `.env` file.
 - One three-word prompt run across twenty image models, with a gallery page to compare them, all in the gitignored `output/` folder.
+- A video transcribed with timestamps and a web page that plays it with a clickable transcript.
 - The Claude Chrome extension installed, and a first try at computer use in both apps.
 
 Part 1 takes about an hour and a quarter, fifteen minutes in the browser and the rest mostly waiting on downloads; part 2 fills the rest of the session, with pages 14 and 15 as the ones to drop if time runs short. Expect one or two snags. That is normal, and it is why we do this in class. If you don't finish today, the Thursday AI Lab and Madeleine's Thursday open studio (5:00 to 7:00 PM) are the catch-up.
@@ -39,6 +40,7 @@ Part 1 takes about an hour and a quarter, fifteen minutes in the browser and the
 | 9 | [Give the folder a voice: AGENTS.md and CLAUDE.md](09-claude-md-and-agents-md.md) | Write the two instruction files, add a rule that ends every reply with a rhyming couplet, restart Claude Code and Codex, and watch. |
 | 10 | [Keys and the `.env` file](10-keys-and-the-env-file.md) | Put the class API key where the scripts find it and nobody else does. |
 | 11 | [Generate with the API keys](11-generate-images-with-scripts.md) | A first generation with Claude through the HUIT account, then text and images through OpenRouter and fal, by hand and then with Claude Code or Codex running the script for you. |
+| 12 | [Transcribe a video, then build a player](12-transcribe-a-video-and-build-a-player.md) | yt-dlp or your phone, ffmpeg for the audio, the transcription script with timestamps, then an agent builds a page where clicking a line jumps the video there. |
 | 13 | [Activity: one prompt, twenty models](13-activity-twenty-models.md) | Browse the fal and OpenRouter catalogues, list them from the API, then have Claude Code run one prompt across twenty models into a gallery in `output/`. |
 | 14 | [Claude in Chrome](14-claude-in-chrome.md) | The browser extension: reading pages, then driving them. |
 | 15 | [Computer use](15-computer-use.md) | The screen itself, in Claude and in ChatGPT, where your account allows. |
