@@ -2,6 +2,40 @@
 
 Installing was the package manager's job. This page signs the terminal in to your GitHub account, tells Git who you are, and copies this repository to your computer. With that done, every later page runs in a folder you own.
 
+## The short version
+
+Eight commands, one at a time, in Terminal or PowerShell. Each is explained in the sections below; if one fails, find its section.
+
+```bash
+gh auth login
+```
+
+(GitHub.com · HTTPS · Yes, authenticate Git · Login with a web browser · paste the code.)
+
+```bash
+gh auth status
+```
+```bash
+cd ~
+```
+```bash
+mkdir AI
+```
+```bash
+cd AI
+```
+```bash
+gh repo clone tdm155ai/tdm155ai-week-2
+```
+```bash
+cd tdm155ai-week-2
+```
+```bash
+code .
+```
+
+"Repository not found" means the organization invitation isn't accepted yet (step 5) or the first command didn't finish. Then come back for 6.2, which tells Git your name; you'll need it the first time you commit.
+
 ## 6.1 `gh`: sign the terminal in to GitHub
 
 Back in Terminal or PowerShell:
