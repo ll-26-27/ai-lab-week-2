@@ -39,7 +39,7 @@ Part 1 takes about an hour and a quarter, fifteen minutes in the browser and the
 | 8 | [Add the folder to the apps](08-add-the-folder-to-the-apps.md) | Point Claude (Cowork and Code) and ChatGPT (Work and Codex) at the folder. Ask each the same question. |
 | 9 | [Give the folder a voice: AGENTS.md and CLAUDE.md](09-claude-md-and-agents-md.md) | Write the two instruction files, add a rule that ends every reply with a rhyming couplet, restart Claude Code and Codex, and watch. |
 | 10 | [Keys and the `.env` file](10-keys-and-the-env-file.md) | Put the class API key where the scripts find it and nobody else does. |
-| 11 | [Generate with the API keys](11-generate-images-with-scripts.md) | A first generation with Claude through the HUIT account, then text and images through OpenRouter and fal, by hand and then with Claude Code or Codex running the script for you. |
+| 11 | [Generate with the API keys](11-generate-images-with-scripts.md) | A first generation with Claude through OpenRouter, then more text and images through OpenRouter and fal, by hand and then with Claude Code or Codex running the script for you. |
 | 12 | [Transcribe a video, then build a player](12-transcribe-a-video-and-build-a-player.md) | yt-dlp or your phone, ffmpeg for the audio, the transcription script with timestamps, then an agent builds a page where clicking a line jumps the video there. |
 | 13 | [Activity: one prompt, twenty models](13-activity-twenty-models.md) | Browse the fal and OpenRouter catalogues, list them from the API, then have Claude Code run one prompt across twenty models into a gallery in `output/`. |
 | 14 | [Claude in Chrome](14-claude-in-chrome.md) | The browser extension: reading pages, then driving them. |

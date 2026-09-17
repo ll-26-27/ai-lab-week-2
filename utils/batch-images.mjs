@@ -6,7 +6,7 @@
 // Options:
 //   --models a,b,c     OpenRouter model IDs (see list-image-models.mjs). Required.
 //   --n COUNT          Images per model (default 4).
-//   --provider NAME    openrouter (default), fal, huit-openai, huit-gemini. All models in one batch use one provider.
+//   --provider NAME    openrouter (default) or fal. All models in one batch use one provider.
 //   --out DIRECTORY    New folder for the batch (default output/batches/<timestamp>-<prompt-slug>).
 //   --parallel COUNT   Requests in flight at once (default 2).
 //   --env-file FILE    Credential file (default: repo root .env).

@@ -116,7 +116,7 @@ All are Node scripts, no dependencies, Node 22 or newer. Every one has `--help`,
 | `utils/list-image-models.mjs`, `utils/list-text-models.mjs` | what OpenRouter offers today (no key needed) |
 | `utils/comic.mjs init|generate|import|status|render` | the origin-story comic tools; read `.agents/skills/origin-story/SKILL.md` before using them (needs `npm install` once, for Sharp) |
 
-Providers and the key each needs: `huit-bedrock`, `huit-openai`, `huit-gemini` (Harvard's gateway, `HUIT_API_KEY`); `openrouter` (`OPENROUTER_API_KEY`); `fal` (`FAL_API_KEY`). Claude through HUIT uses Bedrock ids such as `us.anthropic.claude-sonnet-5`; the full verified list is in `utils/examples.md`.
+Providers and the key each needs: `openrouter` (`OPENROUTER_API_KEY`) and `fal` (`FAL_API_KEY`). Claude through OpenRouter uses ids such as `anthropic/claude-sonnet-5`; the full verified list is in `utils/examples.md`.
 
 ## How to help with a generation or a transcription
 

@@ -19,7 +19,6 @@ The scripts in `utils/` need an API key to talk to a model, but a key should nev
 ```text
 OPENROUTER_API_KEY=your-key-here
 FAL_API_KEY=
-HUIT_API_KEY=
 ```
 
 The script reads that file as [environment variables](environment-variable.md) at startup, fills only the keys it finds, and leaves the rest blank. This repo ships a `.env.example` with the same shape and no real values, so the pattern travels with the code while the secrets never do; `.gitignore` makes sure Git never tracks the real `.env`, only the example.

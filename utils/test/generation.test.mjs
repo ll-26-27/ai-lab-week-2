@@ -15,7 +15,7 @@ function temporary(t) { const dir = mkdtempSync(join(tmpdir(), 'tdm155ai-utils-'
 const env = Object.fromEntries(Object.values(providers).map(p => [p.key, `test-${p.key}`]));
 const config = {env, file: '/not-a-real-env'};
 
-test('all five text providers map model, prompt, system and token limit', () => {
+test('both text providers map model, prompt, system and token limit', () => {
   for (const provider of Object.keys(providers)) {
     const r = buildRequest('text', provider, 'test-model', 'Tell a story', {system: 'Be brief', 'max-tokens': 42, temperature: 0});
     assert.match(JSON.stringify(r.body), /Tell a story/);
@@ -23,9 +23,7 @@ test('all five text providers map model, prompt, system and token limit', () => 
     assert.match(JSON.stringify(r.body), /42/);
     assert.ok(r.url.startsWith(providers[provider].base));
   }
-  const fable = buildRequest('text', 'huit-bedrock', 'claude-fable-5', 'Hello');
-  assert.match(fable.url, /global.anthropic.claude-fable-5\/invoke$/);
-  assert.equal(fable.body.anthropic_version, 'bedrock-2023-05-31');
+  assert.throws(() => buildRequest('text', 'not-a-provider', 'm', 'p'), /Unknown provider/);
 });
 
 test('image adapters preserve references and provider parameters', () => {
@@ -36,14 +34,7 @@ test('image adapters preserve references and provider parameters', () => {
   assert.equal(router.body.n, 2);
   const fal = buildRequest('image', 'fal', 'fal-ai/nano-banana/edit', 'p', {}, refs, {seed: 7});
   assert.deepEqual(fal.body.image_urls, [refs[0].url]); assert.equal(fal.body.seed, 7);
-  const gemini = buildRequest('image', 'huit-gemini', 'gemini-image', 'p', {aspect: '2:3'}, refs);
-  assert.equal(gemini.body.contents[0].parts[1].inlineData.data, png.toString('base64'));
-  assert.deepEqual(gemini.body.generationConfig.responseModalities, ['TEXT', 'IMAGE']);
-  const openai = buildRequest('image', 'huit-openai', 'gpt-image-2', 'p', {size: '1024x1536'});
-  assert.match(openai.url, /images\/generations$/);
-  assert.equal(openai.body.size, '1024x1536');
-  assert.throws(() => buildRequest('image', 'huit-openai', 'm', 'p', {}, refs), /not bundled/);
-  assert.throws(() => buildRequest('image', 'huit-bedrock', 'm', 'p'), /not bundled/);
+  assert.throws(() => buildRequest('image', 'not-a-provider', 'm', 'p'), /Unknown provider/);
   assert.throws(() => buildRequest('image', 'fal', 'fal-ai/flux/dev', 'p', {size: '1024x1024'}), /not mapped/);
   assert.throws(() => buildRequest('image', 'fal', 'https://elsewhere.test', 'p'), /endpoint ID/);
 });
@@ -76,13 +67,12 @@ test('copied utilities and symlink entrypoints find their physical root from ano
   assert.ok(!existsSync(join(pack, 'output')));
 });
 
-test('text extraction omits reasoning and handles all provider schemas', () => {
+test('text extraction omits reasoning and handles both provider schemas', () => {
   assert.equal(textResult({output: 'fal answer', reasoning: 'hidden'}), 'fal answer');
   assert.equal(textResult({choices: [{message: {content: 'router answer'}}]}), 'router answer');
-  assert.equal(textResult({candidates: [{content: {parts: [{text: 'hidden', thought: true}, {text: 'gemini answer'}]}}]}), 'gemini answer');
-  assert.equal(textResult({output: {message: {content: [{text: 'bedrock answer'}]}}}), 'bedrock answer');
-  assert.equal(textResult({content: [{type: 'text', text: 'native answer'}]}), 'native answer');
-  assert.equal(imageResults({candidates: [{content: {parts: [{inline_data: {data: 'bytes', mime_type: 'image/png'}}]}}]})[0].b64_json, 'bytes');
+  assert.equal(textResult({choices: [{message: {content: [{type: 'text', text: 'router parts'}]}}]}), 'router parts');
+  assert.deepEqual(imageResults({images: [{url: 'https://cdn.fal.media/x'}]}), [{url: 'https://cdn.fal.media/x'}]);
+  assert.deepEqual(imageResults({}), []);
 });
 
 test('mocked generation uses provider auth, saves PNG bytes, and rejects overwrite before network', async t => {
@@ -120,17 +110,8 @@ test('fal queues once, saves receipt, resumes with GET only, downloads without a
   await assert.rejects(() => falResult({...receipt, status_url: 'https://attacker.example/status'}, {}), /Invalid fal/);
 });
 
-test('HUIT gateways share one key with gateway-specific headers; requests are not retried', async t => {
+test('failed requests are not retried', async t => {
   const dir = temporary(t);
-  for (const provider of ['huit-openai', 'huit-gemini', 'huit-bedrock']) {
-    const req = buildRequest('text', provider, 'model', 'hello');
-    await execute('text', req, config, join(dir, provider), {}, {fetcher: async (url, init) => {
-      const header = provider === 'huit-bedrock' ? 'x-api-key' : 'api-key';
-      assert.equal(providers[provider].key, 'HUIT_API_KEY');
-      assert.equal(init.headers[header], 'test-HUIT_API_KEY');
-      assert.ok(!init.headers.Authorization); return json({output_text: 'hello'});
-    }});
-  }
   let count = 0;
   await assert.rejects(() => execute('text', buildRequest('text', 'openrouter', 'm', 'p'), config, join(dir, 'failure'), {}, {fetcher: async () => {count++; return new Response('secret text', {status: 429});}}), /HTTP 429/);
   assert.equal(count, 1);

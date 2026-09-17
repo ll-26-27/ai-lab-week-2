@@ -97,7 +97,6 @@ Plain-language definitions for TDM 155AI, built from week 2's setup tutorial: th
 | [fal](fal.md) | Another model aggregator, alongside OpenRouter, offering a different roster of image and video models through one key. |
 | [fal image APIs](fal-image-apis.md) | fal's image endpoints, one URL per model, where the reference-image field and its limit differ endpoint by endpoint and the OpenAPI schema is how you find out. |
 | [fal video APIs](fal-video-apis.md) | fal's video endpoints: text-to-video, image-to-video from a first frame, first-and-last-frame, keyframes, and reference-to-video, each with its own field names. |
-| [HUIT API portal](huit-api-portal.md) | Harvard's own gateway to models like OpenAI's and Google's, reached with an HUIT-issued key instead of a personal account. |
 | [OpenRouter](openrouter.md) | An aggregator that puts many companies' text and image models behind one API key. |
 | [OpenRouter image APIs](openrouter-image-apis.md) | OpenRouter's dedicated Image API (and its Video API): one request shape for fifty-plus models, reference images in, and a discovery endpoint that says how many each model takes. |
 
@@ -195,7 +194,6 @@ Plain-language definitions for TDM 155AI, built from week 2's setup tutorial: th
 - **[Harness](harness.md)**: The program wrapped around a model that runs the loop, holds its tools, and enforces its permission rules.
 - **[Homebrew](homebrew.md)**: The package manager for macOS, installed once from a single terminal command, run as `brew`.
 - **[HTML](html.md)**: The language web pages are written in, one step up from Markdown when a document needs real layout and interaction.
-- **[HUIT API portal](huit-api-portal.md)**: Harvard's own gateway to models like OpenAI's and Google's, reached with an HUIT-issued key instead of a personal account.
 - **[Image model](image-model.md)**: A model that turns a text prompt into a picture, a separate roster from text models like Claude or GPT.
 - **[JSON](json.md)**: A plain-text format for structured data, the shape of every request and response the scripts save.
 - **[Large language model](llm.md)**: The kind of system Claude and ChatGPT are: a program that predicts the next chunk of text from patterns in training data.

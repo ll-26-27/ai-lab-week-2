@@ -6,7 +6,7 @@
 // Options:
 //   --models a,b,c     Model IDs for the selected provider. Required.
 //   --n COUNT          Runs per model (default 1).
-//   --provider NAME    openrouter (default), fal, huit-openai, huit-gemini, huit-bedrock. All models in one batch use one provider.
+//   --provider NAME    openrouter (default) or fal. All models in one batch use one provider.
 //   --system TEXT      Optional system prompt, passed through to every run.
 //   --expect TEXT      Optional expected answer; adds a correct? column (substring match after stripping commas and spaces).
 //   --out DIRECTORY    New folder for the batch (default output/batches/<timestamp>-<prompt-slug>-text).

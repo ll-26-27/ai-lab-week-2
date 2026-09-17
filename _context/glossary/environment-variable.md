@@ -20,7 +20,7 @@ The reason this indirection exists is separation: the same script can run with a
 
 ## Why it matters this term
 
-Every key this course hands you, OpenRouter, fal, HUIT, reaches the scripts as an environment variable, read from `.env`; understanding that mechanism is what makes `key_available: true` in a `--dry-run` output make sense rather than feel like magic.
+Every key this course hands you, OpenRouter and fal, reaches the scripts as an environment variable, read from `.env`; understanding that mechanism is what makes `key_available: true` in a `--dry-run` output make sense rather than feel like magic.
 
 ## See also
 

@@ -1,6 +1,6 @@
 # 10. Keys and the `.env` file
 
-The scripts in `utils/` talk to image and text models over the internet, through Harvard's HUIT gateway and through OpenRouter and fal, using an **API** (application programming interface): a way for a program, rather than a person in a chat window, to send a request and get a result. Every API request carries a **key**, a long secret string that says which account to bill. This page is about handling that key without leaking it.
+The scripts in `utils/` talk to image and text models over the internet, through OpenRouter and fal, using an **API** (application programming interface): a way for a program, rather than a person in a chat window, to send a request and get a result. Every API request carries a **key**, a long secret string that says which account to bill. This page is about handling that key without leaking it.
 
 ## 10.1 What an environment variable is
 
@@ -17,17 +17,16 @@ cp .env.example .env
 Open `.env` in VS Code. It looks like the example, with blank values:
 
 ```text
-HUIT_API_KEY=
 OPENROUTER_API_KEY=
 FAL_API_KEY=
 ```
 
-Paste each key you were given in class after its `=`, no spaces, no quotes. Save. Fill only the lines you have keys for; today that should be all three.
+Paste each key you were given in class after its `=`, no spaces, no quotes. Save. Fill only the lines you have keys for; today that should be both.
 
 ## 10.3 Confirm without spending anything
 
 ```bash
-node utils/generate-text.mjs huit-bedrock "Reply with HELLO." --model us.anthropic.claude-sonnet-5 --dry-run
+node utils/generate-text.mjs openrouter "Reply with HELLO." --model anthropic/claude-sonnet-5 --dry-run
 ```
 
 `--dry-run` builds the request and prints it, but makes no network call. Two lines to look for in the output:

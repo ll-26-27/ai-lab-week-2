@@ -4,7 +4,7 @@ slug: data-sensitivity
 short: "How sensitive the material you paste, upload, or point a folder at is, and which tools are safe for it."
 aliases: ["data classification"]
 category: safety
-see_also: [claude-cowork, huit-api-portal, prompt-injection]
+see_also: [claude-cowork, prompt-injection]
 updated: 2026-09-16
 ---
 
@@ -24,4 +24,4 @@ It is the standing caution behind every "point this at a folder" or "paste this 
 
 ## See also
 
-[Claude Cowork](claude-cowork.md) · [HUIT API portal](huit-api-portal.md) · [Prompt injection](prompt-injection.md)
+[Claude Cowork](claude-cowork.md) · [Prompt injection](prompt-injection.md)

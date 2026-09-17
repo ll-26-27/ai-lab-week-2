@@ -1,15 +1,15 @@
-# 11. Generate with the API keys: HUIT first, then OpenRouter and fal
+# 11. Generate with the API keys: OpenRouter and fal
 
-In the chat apps you type a prompt and an answer appears. Behind that is a request to a model with a name, a price, and a handful of settings. The scripts in `utils/` make that request directly, through three doors: Harvard's own **HUIT** gateway, and two commercial aggregators, **OpenRouter** and **fal**. Same models, no button, and everything that comes back is saved as files you can open.
+In the chat apps you type a prompt and an answer appears. Behind that is a request to a model with a name, a price, and a handful of settings. The scripts in `utils/` make that request directly, through two doors, the commercial aggregators **OpenRouter** and **fal**. Same models, no button, and everything that comes back is saved as files you can open.
 
 You need Node (installed in step 3 or 4; `node --version` should say v22 or higher) and the keys from step 10. Every command below was run for real on 2026-09-16; `utils/examples.md` keeps that list current.
 
-## 11.1 First generation: Claude through HUIT
+## 11.1 First generation: Claude through OpenRouter
 
-HUIT is Harvard's gateway to outside models. One key, billed to the university, no personal account with any company. Start here, with Claude Sonnet:
+OpenRouter puts dozens of companies' models behind one key and one request shape. One key, billed to the class account, no personal account with any company. Start here, with Claude Sonnet:
 
 ```bash
-node utils/generate-text.mjs huit-bedrock "Reply with the single word HELLO." --model us.anthropic.claude-sonnet-5
+node utils/generate-text.mjs openrouter "Reply with the single word HELLO." --model anthropic/claude-sonnet-5
 ```
 
 `HELLO` prints, and the script says `Saved output/text/<timestamp>-<id>`. Open that folder in the Explorer:
@@ -21,31 +21,20 @@ node utils/generate-text.mjs huit-bedrock "Reply with the single word HELLO." --
 That is the whole transaction, on disk. Now the multiplication, through the same Haiku you asked this morning, only with no chat app around it:
 
 ```bash
-node utils/generate-text.mjs huit-bedrock "What is 82,345 × 67,890? Answer with the number only." --model us.anthropic.claude-haiku-4-5-20251001-v1:0
+node utils/generate-text.mjs openrouter "What is 82,345 × 67,890? Answer with the number only." --model anthropic/claude-haiku-4.5
 ```
 
 No system prompt, no tools, no model picker. Compare the number with what Haiku said in step 1. Then the same prompt through Opus:
 
 ```bash
-node utils/generate-text.mjs huit-bedrock "What is 82,345 × 67,890? Answer with the number only." --model us.anthropic.claude-opus-5
+node utils/generate-text.mjs openrouter "What is 82,345 × 67,890? Answer with the number only." --model anthropic/claude-opus-5
 ```
 
-The Claude ids on this gateway are Bedrock's: `us.anthropic.claude-sonnet-5`, `us.anthropic.claude-opus-5`, the dated Haiku id above, and `claude-fable-5` as a shortcut. `utils/examples.md` has the verified list.
-
-The same key reaches OpenAI and Gemini through HUIT too, text and images:
-
-```bash
-node utils/generate-text.mjs huit-openai "Reply with the single word HELLO." --model gpt-5-mini
-```
-```bash
-node utils/generate-image.mjs huit-gemini "a red pencil astronaut, comic-book inks" --model gemini-2.5-flash-image
-```
-
-The image lands as `image-01.png` in a new `output/image/<run>/` folder. Open it.
+The Claude ids on OpenRouter are `anthropic/claude-sonnet-5`, `anthropic/claude-opus-5`, and `anthropic/claude-haiku-4.5`; `node utils/list-text-models.mjs --grep anthropic` prints the current set, and `utils/examples.md` has the verified list.
 
 ## 11.2 OpenRouter: one key, many models
 
-OpenRouter puts dozens of companies' models behind one key and one request shape. First see what's there today:
+Claude was one door in; the same key opens the rest of the roster. First see what's there today:
 
 ```bash
 node utils/list-image-models.mjs
@@ -63,7 +52,7 @@ node utils/generate-text.mjs openrouter "Reply with the single word HELLO." --mo
 node utils/generate-image.mjs openrouter "a red pencil astronaut, comic-book inks" --model black-forest-labs/flux.2-klein-4b
 ```
 
-Look in `response.json` for the image run: OpenRouter reports the cost. Then the same image prompt through a second model:
+The image lands as `image-01.png` in a new `output/image/<run>/` folder. Open it. Then look in `response.json` for the image run: OpenRouter reports the cost. Then the same image prompt through a second model:
 
 ```bash
 node utils/generate-image.mjs openrouter "a red pencil astronaut, comic-book inks" --model google/gemini-2.5-flash-image
@@ -111,7 +100,7 @@ It reads the script, works out the command, asks permission to run it, runs it, 
 Read utils/generate-image.mjs --help and list the options I could use.
 ```
 ```
-Make five variations of that lighthouse prompt, run all five through huit-gemini, and put the results in one folder.
+Make five variations of that lighthouse prompt, run all five through openrouter with google/gemini-2.5-flash-image, and put the results in one folder.
 ```
 
 The model is now operating the same tool you just operated by hand. Because it's a script in your folder, you can see every command it ran and every file it made, and you can ask it to change the script itself.
@@ -128,9 +117,8 @@ It prints a line per run, then `Batch saved: output/batches/<timestamp>-a-red-pe
 
 ## When something fails
 
-- **`Missing HUIT_API_KEY`** (or another key): step 10.
+- **`Missing OPENROUTER_API_KEY`** (or `FAL_API_KEY`): step 10.
 - **`API HTTP 401` or `403`**: the key is wrong or not yet active. Check for stray spaces in `.env`.
 - **`API HTTP 402`** or a message about credit: that key's account is out of money. Tell us.
 - **`API HTTP 400`**: the model didn't like a setting, or the id is wrong. Copy ids from the lists above or from `utils/examples.md`.
 - **`Provider returned no images`**: usually a safety filter on the prompt. Open `response.json` in the run folder to see what it said.
-- **HUIT Bedrock rejects a model id**: it wants the exact Bedrock profile id. Copy one from `utils/examples.md`; older Claude ids need their date and `-v1:0` suffix, the Claude 5 ids do not.

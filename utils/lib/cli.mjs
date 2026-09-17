@@ -32,7 +32,7 @@ export async function run(kind, argv = process.argv.slice(2), deps = {}) {
   const {values: o, positionals} = argumentsFor(kind, argv);
   if (o.help) {
     console.log(`Usage: node utils/generate-${kind}.mjs PROVIDER "prompt" --model MODEL [options]
-Providers: ${Object.keys(providers).filter(p => kind === 'text' || p !== 'huit-bedrock').join(', ')}
+Providers: ${Object.keys(providers).join(', ')}
   --input FILE          Prompt from a UTF-8 file (- reads stdin)
   --out DIRECTORY       New output directory (default: output/${kind}/unique-run)
   --params-file FILE    Additional native provider JSON parameters
@@ -41,7 +41,7 @@ Providers: ${Object.keys(providers).filter(p => kind === 'text' || p !== 'huit-b
   --dry-run             Show request without network calls or writes
   --timeout MS          Total request/queue/download deadline (default: 600000)
   --resume RECEIPT      Resume fal status/result retrieval; no new generation
-${kind === 'text' ? '  --system TEXT | --system-file FILE\n  --max-tokens N        Output token limit\n  --temperature N      Optional sampling setting' : '  --ref FILE            Local reference image; repeatable\n  --aspect RATIO        E.g. 2:3 (OpenRouter, fal, HUIT Gemini)\n  --resolution TIER     E.g. 2K (model-dependent)\n  --size WxH            OpenRouter or HUIT OpenAI\n  --quality VALUE       OpenRouter or HUIT OpenAI\n  --format FORMAT       OpenRouter, fal, HUIT OpenAI\n  --n COUNT             Output count (model-dependent)\n  --ref-field FIELD     fal image_urls (default) or image_url'}
+${kind === 'text' ? '  --system TEXT | --system-file FILE\n  --max-tokens N        Output token limit\n  --temperature N      Optional sampling setting' : '  --ref FILE            Local reference image; repeatable\n  --aspect RATIO        E.g. 2:3 (OpenRouter, fal)\n  --resolution TIER     E.g. 2K (model-dependent)\n  --size WxH            OpenRouter only\n  --quality VALUE       OpenRouter only\n  --format FORMAT       OpenRouter, fal\n  --n COUNT             Output count (model-dependent)\n  --ref-field FIELD     fal image_urls (default) or image_url'}
 Model IDs and supported parameters differ by provider. See utils/README.md.`);
     return;
   }
