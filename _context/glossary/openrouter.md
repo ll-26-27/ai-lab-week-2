@@ -5,7 +5,7 @@ short: "An aggregator that puts many companies' text and image models behind one
 aliases: []
 category: apis-and-keys
 see_also: [openrouter-image-apis, api, model, fal]
-updated: 2026-09-16
+updated: 2026-09-17
 ---
 
 # OpenRouter
@@ -17,6 +17,8 @@ updated: 2026-09-16
 A chat app hands you one company's models. OpenRouter sits between you and many companies at once, Google, OpenAI, Anthropic, Black Forest Labs, and others, letting the scripts in `utils/` name a model by an id like `google/gemini-2.5-flash-image` or `openai/gpt-5-mini` and reach it through a single account and key (`OPENROUTER_API_KEY`). `node utils/list-image-models.mjs` prints every image model it currently offers, with no key needed just to see the list.
 
 The roster changes month to month as new models ship and old ones are retired, which is itself worth noticing: a script that names a specific model id can simply stop working when that id disappears, a small but real lesson in how fast this space moves. Prices vary widely by model and are listed at openrouter.ai/models, not in the listing endpoint the scripts read.
+
+In September 2026 OpenRouter fronts several hundred models from dozens of providers through one OpenAI-compatible request shape, billing each provider's published price plus a small platform fee (https://openrouter.ai/docs/guides/overview/models). We give you a key to it rather than to one company's app for three reasons: comparison across models is the lesson, and it only works behind one key; a key to an aggregator is a key to the field, not a vendor, so when a better model ships you change one word; and it is the same door any product with an "AI feature" uses underneath, so what you learn here transfers.
 
 ## Why it matters this term
 
